@@ -38,21 +38,17 @@ def get_occurrences(pattern, text):
     pattern_hash = get_hash(pattern)
     occurances=[]
 
-    for i in range(text_len):
-        if text_len-i<pattern_len:
-            break
-        main_text_hash = get_hash(text[i:i+pattern_len])
-        if pattern_hash == main_text_hash:
+    for i in range(text_len-pattern_len+1):
+        if pattern_hash == get_hash(text[i:i+pattern_len]):
             if pattern == text[i:i+pattern_len]:
                 occurances.append(i)
     return occurances
 
 def get_hash(pattern: str) -> int:
-    m = len(pattern)
     result = 0
-    for i in range(m):
-        result = (13 * result + ord(pattern[i])) % 256
-    return result
+    for i in pattern:
+        result = (37 * result + ord(i))
+    return result % 256
 
 # this part launches the functions
 if __name__ == '__main__':
