@@ -47,10 +47,9 @@ def get_occurrences(pattern, text):
 def get_hash(pattern: str) -> int:
     result = 0
     for i in pattern:
-        result = (37 * result + ord(i))
-    return result % 256
+        result = (37 * result + ord(i)) % 256
+    return result
 
 # this part launches the functions
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
-
